@@ -1,0 +1,93 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{groupplot}[group style={group size=2 by 3}]
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={Clairvoyant},
+x grid style={darkgray176},
+xmin=-1, xmax=2,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0, ymax=557450.25,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-0.5,0) rectangle (axis cs:0.5,530905);
+\draw[draw=none,fill=steelblue31119180] (axis cs:0.5,0) rectangle (axis cs:1.5,469095);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={UCB1},
+x grid style={darkgray176},
+xmin=-1, xmax=2,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0, ymax=1049895,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-0.5,0) rectangle (axis cs:0.5,999900);
+\draw[draw=none,fill=steelblue31119180] (axis cs:0.5,0) rectangle (axis cs:1.5,100);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={EXP3},
+x grid style={darkgray176},
+xmin=-1, xmax=2,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0, ymax=553970.55,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-0.5,0) rectangle (axis cs:0.5,527591);
+\draw[draw=none,fill=steelblue31119180] (axis cs:0.5,0) rectangle (axis cs:1.5,472409);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={MiniBatchEXP3},
+x grid style={darkgray176},
+xmin=-1, xmax=2,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0, ymax=592452,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-0.5,0) rectangle (axis cs:0.5,564240);
+\draw[draw=none,fill=steelblue31119180] (axis cs:0.5,0) rectangle (axis cs:1.5,435760);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={AR2},
+x grid style={darkgray176},
+xmin=-1, xmax=2,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0, ymax=948269.7,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-0.5,0) rectangle (axis cs:0.5,96886);
+\draw[draw=none,fill=steelblue31119180] (axis cs:0.5,0) rectangle (axis cs:1.5,903114);
+
+\nextgroupplot[
+tick align=outside,
+tick pos=left,
+title={ARB},
+x grid style={darkgray176},
+xmin=-1, xmax=2,
+xtick style={color=black},
+y grid style={darkgray176},
+ymin=0, ymax=538159.65,
+ytick style={color=black}
+]
+\draw[draw=none,fill=steelblue31119180] (axis cs:-0.5,0) rectangle (axis cs:0.5,512533);
+\draw[draw=none,fill=steelblue31119180] (axis cs:0.5,0) rectangle (axis cs:1.5,487467);
+\end{groupplot}
+
+\end{tikzpicture}
