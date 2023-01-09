@@ -1,5 +1,12 @@
 autoregressive_bandits/pricing_data/
 autoregressive_bandits/pricing_scenario_generation.ipynb
+autoregressive_bandits/input/*
+!autoregressive_bandits/input/testcase_6.json
+!autoregressive_bandits/input/testcase_8.json
+!autoregressive_bandits/input/testcase_11.json
+!autoregressive_bandits/input/testcase_k_analysis.json
+!autoregressive_bandits/input/testcase_m_bound_analysis.json
+!autoregressive_bandits/input/testcase_pricing*.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

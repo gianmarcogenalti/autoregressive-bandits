@@ -1,2 +1,2 @@
-# autoregressive-bandits
-# TODO
+# Autoregressive Bandits
+TODO
