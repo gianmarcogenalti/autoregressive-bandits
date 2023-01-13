@@ -1,5 +1,7 @@
 autoregressive_bandits/pricing_data/
 autoregressive_bandits/pricing_scenario_generation.ipynb
+*.tex
+tex/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
