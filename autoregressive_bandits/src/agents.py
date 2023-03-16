@@ -115,8 +115,11 @@ class UCB1Agent(Agent):
 
     def update(self, X):
         self.rewards[self.last_pull].append(X)
-        self.avg_reward[self.last_pull] = (
-            self.avg_reward[self.last_pull]*self.n_pulls[self.last_pull]+X)/(self.n_pulls[self.last_pull]+1)
+        if self.n_pulls[self.last_pull] == 1:
+            self.avg_reward[self.last_pull] = X
+        else:
+            self.avg_reward[self.last_pull] = (
+                self.avg_reward[self.last_pull]*self.n_pulls[self.last_pull]+X)/(self.n_pulls[self.last_pull]+1)
         self.t += 1
 
 
