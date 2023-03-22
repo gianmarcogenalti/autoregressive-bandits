@@ -13,7 +13,7 @@ if __name__ == '__main__':
     import sys
 
     warnings.filterwarnings('ignore')
-    out_folder = 'autoregressive_bandits/output/k_analysis/'
+    out_folder = 'autoregressive_bandits/output/k_analysis0/'
     try:
         os.mkdir(out_folder)
         os.mkdir(out_folder+'png/')
@@ -21,19 +21,19 @@ if __name__ == '__main__':
     except:
         pass
 
-    f = open(f'autoregressive_bandits/input/testcase_k_analysis.json')
+    f = open(f'autoregressive_bandits/input/testcase_k_analysis0.json')
     param_dict = json.load(f)
 
     print(f'Parameters: {param_dict}')
 
     param_dict['gamma'] = np.array(param_dict['gamma'])
 
-    k_values = [1, 2, 4, 8, 10, 16]
+    k_values = [0, 1, 2, 4, 8, 16]
     param_dict['X0'] = [0]*max(k_values)
     T = param_dict['T']+len(param_dict['X0'])
     k_true = param_dict['gamma'].shape[1]-1
     n_arms = param_dict['gamma'].shape[0]
-
+    a_hists = {}
     # Clairvoyant
     print('Training Clairvoyant algorithm')
     clrv = 'Clairvoyant'
@@ -42,8 +42,8 @@ if __name__ == '__main__':
     agent = AutoregressiveClairvoyant(
         n_arms=n_arms, gamma=param_dict['gamma'], X0=param_dict['X0'], k=k_true)
     core = Core(env, agent)
-    clairvoyant_logs = core.simulation(n_epochs=param_dict['n_epochs'], n_rounds=T)[
-        :, len(param_dict['X0']):]
+    clairvoyant_logs, a_hists['Clairvoyant'] = core.simulation(n_epochs=param_dict['n_epochs'], n_rounds=T)
+    clairvoyant_logs = clairvoyant_logs[:, len(param_dict['X0']):]
 
     arb_logs = {}
     arb = {}
@@ -57,8 +57,9 @@ if __name__ == '__main__':
         agent = AutoregressiveRidgeAgent(n_arms, param_dict['X0'], k,  m=param_dict['m'],
                                          sigma_=param_dict['noise_std'], delta_=param_dict['delta'], lambda_=param_dict['lambda'])
         core = Core(env, agent)
-        arb_logs[k] = core.simulation(n_epochs=param_dict['n_epochs'], n_rounds=T)[
-            :, len(param_dict['X0']):]
+        arb_logs[k], a_hists[k] = core.simulation(n_epochs=param_dict['n_epochs'], n_rounds=T)
+        arb_logs[k] = arb_logs[k][:, len(param_dict['X0']):]
+        
         regret[arb[k]] = np.inf * np.ones((param_dict['n_epochs'], T))
         for i in range(param_dict['n_epochs']):
             regret[arb[k]][i, :] = clairvoyant_logs[i, :] - arb_logs[k][i, :]
