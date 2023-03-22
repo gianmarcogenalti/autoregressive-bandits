@@ -58,7 +58,7 @@ if __name__ == '__main__':
         # UCB1
         print('Training UCB1 Algorithm')
         env = AutoregressiveEnvironment(n_rounds=T, gamma=param_dict['gamma'], k=k, noise_std=param_dict['noise_std'], X0=param_dict['X0'], random_state=param_dict['seed'])
-        agent = UCB1Agent(n_arms, max_reward=max_reward)
+        agent = UCB1Agent(n_arms, sigma=param_dict['noise_std'])
         core = Core(env, agent)
         logs['UCB1'], a_hists['UCB1'] = core.simulation(n_epochs=param_dict['n_epochs'], n_rounds=T)
         logs['UCB1'] = logs['UCB1'][:, len(param_dict['X0']):]
@@ -85,10 +85,15 @@ if __name__ == '__main__':
         logs['MiniBatchEXP3'] = logs['MiniBatchEXP3'][:, len(param_dict['X0']):]
 
         # AR2
-        alpha = max(np.sum(param_dict['gamma'][:,1:],axis=1))
         sigma = param_dict['noise_std']
-        epoch_size = int(n_arms/(alpha*sigma)**3+1)
-        c0 = np.sqrt(4*np.log(1/(alpha*sigma))+4*np.log(epoch_size)+2*np.log(4*n_arms))
+        if param_dict['gamma'].shape[1]>1:
+            alpha = max(np.sum(param_dict['gamma'][:,1:],axis=1))
+            epoch_size = int(n_arms/(alpha*sigma)**3+1)
+            c0 = np.sqrt(4*np.log(1/(alpha*sigma))+4*np.log(epoch_size)+2*np.log(4*n_arms))
+        else:
+            epoch_size = T
+            alpha = 0
+            c0 = 0
         print('Training AR2 Algorithm')
         env = AutoregressiveEnvironment(n_rounds=T, gamma=param_dict['gamma'], k=k, noise_std=param_dict['noise_std'], X0=param_dict['X0'], random_state=param_dict['seed'])
         agent = AR2Agent(n_arms, alpha=alpha, epoch_size=epoch_size, c0=c0, sigma=sigma)

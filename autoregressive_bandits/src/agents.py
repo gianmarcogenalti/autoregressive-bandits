@@ -92,9 +92,9 @@ class MiniBatchExp3Agent(Exp3Agent):
 
 
 class UCB1Agent(Agent):
-    def __init__(self, n_arms, max_reward=1):
+    def __init__(self, n_arms, sigma=1):
         super().__init__(n_arms)
-        self.max_reward = max_reward
+        self.sigma = sigma
         self.reset()
 
     def reset(self):
@@ -105,7 +105,7 @@ class UCB1Agent(Agent):
         return self
 
     def pull_arm(self):
-        ucb1 = [self.avg_reward[a]+self.max_reward *
+        ucb1 = [self.avg_reward[a]+self.sigma*
                 np.sqrt(2*np.log(self.t)/self.n_pulls[a]) for a in range(self.n_arms)]
         self.last_pull = np.argmax(ucb1)
         new_a = self.arms[self.last_pull]
@@ -224,7 +224,7 @@ class AutoregressiveClairvoyant(Agent):
         if self.k > 0:
             self.z = np.append(self.X[-self.k:], 1)[::-1].reshape(-1, 1)
         else:
-            self.x = 1
+            self.z = 1
 
 
 class AutoregressiveRidgeAgent(Agent):
